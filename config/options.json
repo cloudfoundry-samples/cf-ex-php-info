@@ -1,3 +1,4 @@
 {
-    "ADMIN_EMAIL": "dan@mikusa.com"
+    "ADMIN_EMAIL": "dan@mikusa.com",
+    "WEB_SERVER": "nginx"
 }
