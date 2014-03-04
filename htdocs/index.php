@@ -9,5 +9,6 @@
         <p>Static resource test</p>
         <img src="technical-difficulties1.jpg" alt="technical difficulties" />
         <p>Property Test: <?php print (array_key_exists('test', $_GET) ? $_GET['test'] : 'None') ?> </p>
+        <p>Env Test: <?php print (array_key_exists('SOME_VAR', $_ENV) ? $_ENV['SOME_VAR'] : 'None') ?></p>
     </body>
 </html>

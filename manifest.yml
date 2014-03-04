@@ -9,3 +9,4 @@ applications:
   buildpack: https://github.com/dmikusa-pivotal/cf-php-build-pack.git
   env:
     BP_DEBUG: True
+    SOME_VAR: Wheee
