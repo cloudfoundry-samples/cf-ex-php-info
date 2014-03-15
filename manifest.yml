@@ -4,7 +4,6 @@ applications:
   memory: 128M
   instances: 1
   host: php-info
-  domain: cfapps.io
   path: .
   buildpack: https://github.com/dmikusa-pivotal/cf-php-build-pack.git
   env:
