@@ -14,6 +14,15 @@ function test_exten {
     fi
 }
 
+function test_version {
+    if [[ $DATA != *"<h1 class=\"p\">PHP Version $1</h1>"* ]]
+    then
+        echo "PHP Version doesn't match!"
+    else
+        echo "Found PHP version $1"
+    fi
+}
+
 # check for each PHP extension
 echo "Checking for extensions that didn't load.  Missing extensions listed below."
 
@@ -41,6 +50,8 @@ test_exten 'redis'
 test_exten 'snmp'
 test_exten 'zlib'
 test_exten 'xdebug'
+
+test_version "$1"
 
 echo 'Done'
 
