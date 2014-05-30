@@ -1,6 +1,7 @@
 {
     "ADMIN_EMAIL": "dan@mikusa.com",
     "WEB_SERVER": "nginx",
+    "PHP_VERSION": "{PHP_54_LATEST}",
     "PHP_EXTENSIONS": ["amqp", "apc", "bz2", "curl", "dba", "gd", "gettext", "gmp", "igbinary", "imap", "ldap", "mcrypt", "memcache", "memcached", "mongo", "msgpack", "openssl", "pdo_pgsql", "pgsql", "pspell", "redis", "snmp", "zlib"],
     "ZEND_EXTENSIONS": ["xdebug"]
 }
