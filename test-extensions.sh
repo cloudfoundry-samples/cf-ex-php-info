@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# get expected version
+PHP_VERSION=$1
+if [ "$PHP_VERSION" == "" ]; then
+    echo "PRO TIP:  Set the expected version by passing an argument to this script.  Ex:  ./test-extensions.sh <version>"
+fi
+
 # get URL
 URL=http://$(cf app php-info | grep "urls:" | cut -d ':' -f 2 | sed -e 's/^ *//' -e 's/ *$//')/info.php
 echo "Test URL is [$URL]"
@@ -27,7 +33,10 @@ function test_version {
 echo "Checking for extensions that didn't load.  Missing extensions listed below."
 
 test_exten 'amqp'
-test_exten 'apc'
+if [[ $PHP_VERSION != "5.5."* ]]; then
+    test_exten 'apc'
+    test_exten 'apcu'
+fi
 test_exten 'bz2'
 test_exten 'curl'
 test_exten 'dba'
@@ -35,8 +44,10 @@ test_exten 'gd'
 test_exten 'gettext'
 test_exten 'gmp'
 test_exten 'igbinary'
+test_exten 'imagick'
 test_exten 'imap'
 test_exten 'ldap'
+test_exten 'mailparse'
 test_exten 'mcrypt'
 test_exten 'memcache'
 test_exten 'memcached'
@@ -49,10 +60,15 @@ test_exten 'phalcon'
 test_exten 'pspell'
 test_exten 'redis'
 test_exten 'snmp'
-test_exten 'zlib'
+test_exten 'sundown'
 test_exten 'xdebug'
+test_exten 'zip'
+test_exten 'zlib'
+test_exten 'newrelic'
 
-test_version "$1"
+if [ "$PHP_VERSION" != "" ]; then
+    test_version "$PHP_VERSION"
+fi
 
 echo 'Done'
 
