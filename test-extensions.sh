@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# are there any missing extensions?
+MISSING=0
+
 # get expected version
 PHP_VERSION=$1
 if [ "$PHP_VERSION" == "" ]; then
@@ -17,6 +20,7 @@ function test_exten {
     if [[ $DATA != *"<a name=\"module_$1\">$1</a>"* ]]
     then
         echo "Extension not found [$1]!!"
+        MISSING=1
     fi
 }
 
@@ -24,6 +28,7 @@ function test_version {
     if [[ $DATA != *"<h1 class=\"p\">PHP Version $1</h1>"* ]]
     then
         echo "PHP Version doesn't match!"
+        MISSING=1
     else
         echo "Found PHP version $1"
     fi
@@ -68,6 +73,11 @@ test_exten 'newrelic'
 
 if [ "$PHP_VERSION" != "" ]; then
     test_version "$PHP_VERSION"
+fi
+
+if [ "$MISSING" == 1 ]; then
+    echo "Something's not right, look at the output above."
+    exit -1
 fi
 
 echo 'Done'
