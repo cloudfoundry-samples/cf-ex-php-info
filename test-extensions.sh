@@ -11,10 +11,6 @@ fi
 
 # cache to test
 CACHE=$2
-if [ "$CACHE" == "" ]; then
-    echo "Defaulting to 'apc'"
-    CACHE="apc"
-fi
 
 # get URL
 URL=http://$(cf app php-info | grep "urls:" | cut -d ':' -f 2 | sed -e 's/^ *//' -e 's/ *$//')/info.php
@@ -45,15 +41,19 @@ function test_version {
 echo "Checking for extensions that didn't load.  Missing extensions listed below."
 
 test_exten 'amqp'
-if [[ $PHP_VERSION != "5.5."* ]]; then
+if [[ $PHP_VERSION == "5.4."* ]]; then
+    if [ "$CACHE" == "" ]; then
+        CACHE="apc"
+    fi
     if [ "$CACHE" == "apc" ]; then
         test_exten 'apc'
         test_exten 'apcu'
     elif [ "$CACHE" == "opcache" ]; then
         test_exten 'Zend OPcache'
-    else
-        echo "No cache selected :("
     fi
+fi
+if [[ $PHP_VERSION == "5.5."* ]]; then
+    test_exten 'Zend OPcache'
 fi
 test_exten 'bz2'
 test_exten 'curl'
