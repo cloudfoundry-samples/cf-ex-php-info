@@ -9,6 +9,13 @@ if [ "$PHP_VERSION" == "" ]; then
     echo "PRO TIP:  Set the expected version by passing an argument to this script.  Ex:  ./test-extensions.sh <version>"
 fi
 
+# cache to test
+CACHE=$2
+if [ "$CACHE" == "" ]; then
+    echo "Defaulting to 'apc'"
+    CACHE="apc"
+fi
+
 # get URL
 URL=http://$(cf app php-info | grep "urls:" | cut -d ':' -f 2 | sed -e 's/^ *//' -e 's/ *$//')/info.php
 echo "Test URL is [$URL]"
@@ -39,8 +46,14 @@ echo "Checking for extensions that didn't load.  Missing extensions listed below
 
 test_exten 'amqp'
 if [[ $PHP_VERSION != "5.5."* ]]; then
-    test_exten 'apc'
-    test_exten 'apcu'
+    if [ "$CACHE" == "apc" ]; then
+        test_exten 'apc'
+        test_exten 'apcu'
+    elif [ "$CACHE" == "opcache" ]; then
+        test_exten 'Zend OPcache'
+    else
+        echo "No cache selected :("
+    fi
 fi
 test_exten 'bz2'
 test_exten 'curl'
@@ -70,6 +83,7 @@ test_exten 'xdebug'
 test_exten 'zip'
 test_exten 'zlib'
 test_exten 'newrelic'
+test_exten 'intl'
 
 if [ "$PHP_VERSION" != "" ]; then
     test_version "$PHP_VERSION"
