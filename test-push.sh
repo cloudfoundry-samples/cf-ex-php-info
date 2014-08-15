@@ -29,7 +29,7 @@ cp .bp-config/options-php54opcache.json .bp-config/options.json
 cf push > logs/opcache.log
 ./test-extensions.sh 5.4.31 opcache
 
-# push with PHP 5.4 & opcache
+# push with PHP 5.5 & opcache
 echo 'Testing PHP 5.5 w/OpCache'
 cp .bp-config/options-php55opcache.json .bp-config/options.json
 cf push > logs/opcache.log
