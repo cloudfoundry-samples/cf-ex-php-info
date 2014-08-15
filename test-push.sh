@@ -25,9 +25,15 @@ cf push > logs/php55.log
 
 # push with PHP 5.4 & opcache
 echo 'Testing PHP 5.4 w/OpCache'
-cp .bp-config/options-opcache.json .bp-config/options.json
+cp .bp-config/options-php54opcache.json .bp-config/options.json
 cf push > logs/opcache.log
-./test-extensions.sh 5.4.31
+./test-extensions.sh 5.4.31 opcache
+
+# push with PHP 5.4 & opcache
+echo 'Testing PHP 5.5 w/OpCache'
+cp .bp-config/options-php55opcache.json .bp-config/options.json
+cf push > logs/opcache.log
+./test-extensions.sh 5.5.15 opcache
 
 # return to default
 git co .bp-config/options.json
