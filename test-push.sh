@@ -2,8 +2,8 @@
 # Test different configurations of PHP, Nginx & HTTPD
 set -e
 
-PHP54="$PHP54"
-PHP55="$PHP55"
+PHP54="5.4.31"
+PHP55="5.5.15"
 
 # start with a clean slate
 git co .bp-config/options.json
