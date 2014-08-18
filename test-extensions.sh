@@ -59,7 +59,8 @@ if [[ $PHP_VERSION == "5.5."* ]]; then
     if [ "$CACHE" == "opcache" ]; then
         test_exten 'Zend OPcache'
     elif [ "$CACHE" == "xcache" ]; then
-        test_exten 'xcache'
+        test_exten 'XCache'
+        test_exten 'XCache Cacher'
     fi
 fi
 test_exten 'bz2'
