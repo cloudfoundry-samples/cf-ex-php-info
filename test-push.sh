@@ -14,6 +14,16 @@ cp .bp-config/options-nginx.json .bp-config/options.json
 cf push > logs/nginx.log
 ./test-extensions.sh $PHP54
 
+# push with NewRelic
+if [ "$NEWRELIC_ENABLED" != "" ]; then
+    echo "Testing Nginx Configuration"
+    cp manifest-nr.yml manifest.yml
+    cp .bp-config/options-nginx.json .bp-config/options.json
+    cf push > logs/newrelic.log
+    git co manifest.yml
+    NEWRELIC_ENABLED=true ./test-extensions.sh $PHP54
+fi
+
 # push with HTTPD
 echo "Testing HTTPD Configuration"
 cp .bp-config/options-httpd.json .bp-config/options.json

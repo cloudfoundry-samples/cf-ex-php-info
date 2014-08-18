@@ -103,7 +103,10 @@ test_exten 'twig'
 test_exten 'xdebug'
 test_exten 'zip'
 test_exten 'zlib'
-test_exten 'newrelic'
+
+if [ "$NEWRELIC_ENABLED" != "" ]; then
+    test_exten 'newrelic'
+fi
 
 if [ "$PHP_VERSION" != "" ]; then
     test_version "$PHP_VERSION"
