@@ -2,17 +2,47 @@
 # Test different configurations of PHP, Nginx & HTTPD
 set -e
 
-PHP54="5.4.31"
-PHP55="5.5.15"
+PHP54="5.4.32"
+PHP55="5.5.16"
+
+# init out test log
+touch logs/tests_passed.log
 
 # start with a clean slate
 git co .bp-config/options.json
 
-# push with Nginx
-echo "Testing Nginx Configuration"
-cp .bp-config/options-nginx.json .bp-config/options.json
-cf push > logs/nginx.log
-./test-extensions.sh $PHP54
+TESTS[1]="nginx-$PHP54-apc"
+TESTS[2]="httpd-$PHP54-apc"
+TESTS[3]="php55-$PHP55-apc"
+TESTS[4]="php54opcache-$PHP54-opcache"
+TESTS[5]="php55opcache-$PHP55-opcache"
+TESTS[6]="php54xcache-$PHP54-xcache"
+TESTS[7]="php54xcache-$PHP55-xcache"
+
+function test_iteration() {
+    CFG=$1
+    PHPVER=$2
+    CACHE=$3
+    if [ $(grep "$CFG" logs/tests_passed.log | wc  -l) == 0 ]; then
+        echo "Testing Configuration [$CFG]"
+        cp ".bp-config/options-$CFG.json" .bp-config/options.json
+        cf push > "logs/$CFG.log"
+        ./test-extensions.sh "$PHPVER" "$CACHE"
+        echo "$CFG" >> logs/tests_passed.log
+    else
+        echo "Skipping Configuration [$CFG]"
+    fi
+}
+
+# Run all tests
+for TEST in "${!TESTS[@]}"; do
+    echo "--------------------------------------------------------------"
+    TMP=${TESTS[$TEST]}
+    CFG=$(echo "$TMP" | cut -d '-' -f 1)
+    PHPV=$(echo "$TMP" | cut -d '-' -f 2)
+    CACHE=$(echo "$TMP" | cut -d '-' -f 3)
+    test_iteration "$CFG" "$PHPV" "$CACHE"
+done
 
 # push with NewRelic
 if [ "$NEWRELIC_ENABLED" != "" ]; then
@@ -23,42 +53,7 @@ if [ "$NEWRELIC_ENABLED" != "" ]; then
     git co manifest.yml
     NEWRELIC_ENABLED=true ./test-extensions.sh $PHP54
 fi
-
-# push with HTTPD
-echo "Testing HTTPD Configuration"
-cp .bp-config/options-httpd.json .bp-config/options.json
-cf push > logs/httpd.log
-./test-extensions.sh $PHP54
-
-# push with PHP 5.5
-echo "Testing PHP 5.5 Configuration"
-cp .bp-config/options-php55.json .bp-config/options.json
-cf push > logs/php55.log
-./test-extensions.sh $PHP55
-
-# push with PHP 5.4 & opcache
-echo 'Testing PHP 5.4 w/OpCache'
-cp .bp-config/options-php54opcache.json .bp-config/options.json
-cf push > logs/opcache54.log
-./test-extensions.sh $PHP54 opcache
-
-# push with PHP 5.5 & opcache
-echo 'Testing PHP 5.5 w/OpCache'
-cp .bp-config/options-php55opcache.json .bp-config/options.json
-cf push > logs/opcache55.log
-./test-extensions.sh $PHP55 opcache
-
-# push with PHP 5.4 & xcache
-echo 'Testing PHP 5.4 w/xcache'
-cp .bp-config/options-php54xcache.json .bp-config/options.json
-cf push > logs/xcache54.log
-./test-extensions.sh $PHP54 xcache
-
-# push with PHP 5.5 & xcache
-echo 'Testing PHP 5.5 w/xcache'
-cp .bp-config/options-php55xcache.json .bp-config/options.json
-cf push > logs/xcache55.log
-./test-extensions.sh $PHP55 xcache
+echo 'OK' >> logs/tests_passed.log
 
 # return to default
 git co .bp-config/options.json
