@@ -4,6 +4,7 @@ set -e
 
 PHP54="5.4.32"
 PHP55="5.5.16"
+PHP56="5.6.0"
 
 # init out test log
 touch logs/tests_passed.log
@@ -18,6 +19,7 @@ TESTS[4]="php54opcache-$PHP54-opcache"
 TESTS[5]="php55opcache-$PHP55-opcache"
 TESTS[6]="php54xcache-$PHP54-xcache"
 TESTS[7]="php55xcache-$PHP55-xcache"
+TESTS[8]="php56-$PHP56-apc"
 
 function test_iteration() {
     CFG=$1
@@ -27,7 +29,7 @@ function test_iteration() {
         echo "Testing Configuration [$CFG]"
         cp ".bp-config/options-$CFG.json" .bp-config/options.json
         cf push > "logs/$CFG.log"
-        ./test-extensions.sh "$PHPVER" "$CACHE"
+        ./test-extensions.sh "$PHPVER" "$CACHE" 2>> "logs/$CFG.log"
         echo "$CFG" >> logs/tests_passed.log
     else
         echo "Skipping Configuration [$CFG]"

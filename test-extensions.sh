@@ -19,6 +19,12 @@ echo "Test URL is [$URL]"
 # load results from info.php
 DATA=$(curl -s "$URL")
 
+# dump results
+>&2 echo "Got results."
+>&2 echo "-------------------------------------------------------------------"
+>&2 echo "$DATA"
+>&2 echo "-------------------------------------------------------------------"
+
 function test_exten {
     if [[ $DATA != *"<a name=\"module_$1\">$1</a>"* ]]
     then
