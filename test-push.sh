@@ -48,14 +48,11 @@ done
 
 # push with NewRelic
 if [ "$NEWRELIC_ENABLED" != "" ]; then
-    echo "Testing Nginx Configuration"
+    echo "Testing NewRelic Configuration"
     cp manifest-nr.yml manifest.yml
-    cp .bp-config/options-nginx.json .bp-config/options.json
-    cf push > logs/newrelic.log
+    test_iteration "newrelic" "$PHP54" "apc"
     git co manifest.yml
-    NEWRELIC_ENABLED=true ./test-extensions.sh $PHP54
 fi
-echo 'OK' >> logs/tests_passed.log
 
 # return to default
 git co .bp-config/options.json
