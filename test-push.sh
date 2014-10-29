@@ -20,6 +20,7 @@ TESTS[5]="php55opcache-$PHP55-opcache"
 TESTS[6]="php54xcache-$PHP54-xcache"
 TESTS[7]="php55xcache-$PHP55-xcache"
 TESTS[8]="php56-$PHP56-apc"
+TESTS[9]="nginx17-$PHP55-apc"
 
 function test_iteration() {
     CFG=$1
