@@ -2,9 +2,9 @@
 # Test different configurations of PHP, Nginx & HTTPD
 set -e
 
-PHP54="5.4.34"
-PHP55="5.5.18"
-PHP56="5.6.2"
+PHP54="5.4.35"
+PHP55="5.5.19"
+PHP56="5.6.3"
 
 # init out test log
 touch logs/tests_passed.log
