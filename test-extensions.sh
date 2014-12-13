@@ -43,6 +43,16 @@ function test_version {
     fi
 }
 
+if [ "$CACHE" == "HHVM" ]; then
+    # HHVM doesn't output anything with phpinfo(), so it's not possible to validate 
+    if [ "$DATA" == "HipHop" ]; then
+        exit 0
+    else
+        echo 'Not the expected response from HHVM.'
+        exit -1
+    fi
+fi
+
 # check for each PHP extension
 echo "Checking for extensions that didn't load.  Missing extensions listed below."
 

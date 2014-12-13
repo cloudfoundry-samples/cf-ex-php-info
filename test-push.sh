@@ -5,6 +5,7 @@ set -e
 PHP54="5.4.35"
 PHP55="5.5.19"
 PHP56="5.6.3"
+HHVM32="3.2.0"
 
 # init out test log
 touch logs/tests_passed.log
@@ -21,6 +22,7 @@ TESTS[6]="php54xcache-$PHP54-xcache"
 TESTS[7]="php55xcache-$PHP55-xcache"
 TESTS[8]="php56-$PHP56-apc"
 TESTS[9]="nginx17-$PHP55-apc"
+TESTS[10]="hhvm-$HHVM32-none"
 
 function test_iteration() {
     CFG=$1

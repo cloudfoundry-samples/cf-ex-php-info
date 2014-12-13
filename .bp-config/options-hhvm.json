@@ -1,0 +1,4 @@
+{
+    "PHP_VM": "hhvm",
+    "WEB_SERVER": "nginx"
+}
