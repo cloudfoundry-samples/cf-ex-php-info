@@ -1,4 +1,5 @@
 {
     "PHP_VM": "hhvm",
-    "WEB_SERVER": "nginx"
+    "WEB_SERVER": "nginx",
+    "ADDITIONAL_PREPROCESS_CMDS": ["hhvm --help", "hhvm junk.php"],
 }
