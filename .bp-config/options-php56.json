@@ -3,5 +3,6 @@
     "WEB_SERVER": "nginx",
     "PHP_VERSION": "{PHP_56_LATEST}",
     "PHP_EXTENSIONS": ["amqp", "bz2", "curl", "dba", "exif", "fileinfo", "ftp", "gd", "gettext", "gmp", "igbinary", "imagick", "imap", "intl", "ldap", "mailparse", "mbstring", "mcrypt", "memcache", "memcached", "mongo", "msgpack", "mysql", "mysqli", "openssl", "pdo", "pdo_sqlite", "pdo_mysql", "pdo_pgsql", "pgsql", "phalcon", "phpiredis", "pspell", "redis", "snmp", "soap", "sockets", "sundown", "twig", "zip", "zlib"],
-    "ZEND_EXTENSIONS": ["xdebug"]
+    "ZEND_EXTENSIONS": ["xdebug"],
+    "ADDITIONAL_PREPROCESS_CMDS": ["php junk.php"]
 }
