@@ -43,7 +43,7 @@ function test_version {
     fi
 }
 
-if [ "$CACHE" == "HHVM" ]; then
+if [ "$CACHE" == "hhvm" ]; then
     # HHVM doesn't output anything with phpinfo(), so it's not possible to validate 
     if [ "$DATA" == "HipHop" ]; then
         exit 0
