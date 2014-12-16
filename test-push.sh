@@ -11,7 +11,7 @@ HHVM32="3.2.0"
 touch logs/tests_passed.log
 
 # start with a clean slate
-git co .bp-config/options.json
+rm -f .bp-config/options.json
 
 TESTS[1]="nginx-$PHP54-apc"
 TESTS[2]="httpd-$PHP54-apc"
@@ -58,4 +58,4 @@ if [ "$NEWRELIC_ENABLED" != "" ]; then
 fi
 
 # return to default
-git co .bp-config/options.json
+rm -f .bp-config/options.json

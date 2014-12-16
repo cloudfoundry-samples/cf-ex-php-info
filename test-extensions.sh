@@ -43,6 +43,11 @@ function test_version {
     fi
 }
 
+# test php version first
+if [ "$PHP_VERSION" != "" ]; then
+    test_version "$PHP_VERSION"
+fi
+
 if [ "$CACHE" == "hhvm" ]; then
     # HHVM doesn't output anything with phpinfo(), so it's not possible to validate 
     if [ "$DATA" == "HipHop" ]; then
@@ -123,10 +128,6 @@ test_exten 'zlib'
 
 if [ "$NEWRELIC_ENABLED" != "" ]; then
     test_exten 'newrelic'
-fi
-
-if [ "$PHP_VERSION" != "" ]; then
-    test_version "$PHP_VERSION"
 fi
 
 if [ "$MISSING" == 1 ]; then
