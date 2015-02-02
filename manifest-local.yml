@@ -5,7 +5,7 @@ applications:
   instances: 1
   host: php-info
   path: .
-  buildpack: http://192.168.0.6:5000/git/cf-php-build-pack
+  buildpack: http://192.168.0.6:5000/cf-php-build-pack.git
   env:
     BP_DEBUG: "True"
     SOME_VAR: Wheee
