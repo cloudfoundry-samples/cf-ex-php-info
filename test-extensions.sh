@@ -123,6 +123,7 @@ test_exten 'sockets'
 test_exten 'sundown'
 test_exten 'twig'
 test_exten 'xdebug'
+test_exten 'xsl'
 test_exten 'zip'
 test_exten 'zlib'
 
