@@ -43,11 +43,6 @@ function test_version {
     fi
 }
 
-# test php version first
-if [ "$PHP_VERSION" != "" ]; then
-    test_version "$PHP_VERSION"
-fi
-
 if [ "$CACHE" == "hhvm" ]; then
     # HHVM doesn't output anything with phpinfo(), so it's not possible to validate 
     if [ "$DATA" == "HipHop" ]; then
@@ -56,6 +51,11 @@ if [ "$CACHE" == "hhvm" ]; then
         echo 'Not the expected response from HHVM.'
         exit -1
     fi
+fi
+
+# test php version first
+if [ "$PHP_VERSION" != "" ]; then
+    test_version "$PHP_VERSION"
 fi
 
 # check for each PHP extension
