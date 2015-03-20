@@ -2,9 +2,9 @@
 # Test different configurations of PHP, Nginx & HTTPD
 set -e
 
-PHP54="5.4.38"
-PHP55="5.5.22"
-PHP56="5.6.6"
+PHP54="5.4.39"
+PHP55="5.5.23"
+PHP56="5.6.7"
 HHVM32="3.2.0"
 
 # init out test log
