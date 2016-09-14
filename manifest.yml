@@ -1,11 +1,8 @@
 ---
 applications:
-- name: php-info
+- name: cf-ex-php-info
   memory: 128M
   instances: 1
-  host: php-info
   path: .
-  buildpack: https://github.com/dmikusa-pivotal/cf-php-build-pack.git
   env:
-    BP_DEBUG: "True"
     SOME_VAR: Wheee
