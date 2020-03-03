@@ -2,7 +2,7 @@
 applications:
 - name: cf-ex-php-info
   memory: 128M
-  instances: 1
-  path: .
+  buildpacks:
+  - php_buildpack
   env:
     SOME_VAR: Wheee

@@ -1,8 +1,0 @@
-{
-    "ADMIN_EMAIL": "dan@mikusa.com",
-    "WEB_SERVER": "nginx",
-    "NGINX_VERSION": "{NGINX_17_LATEST}",
-    "PHP_VERSION": "{PHP_55_LATEST}",
-    "PHP_EXTENSIONS": ["amqp", "apc", "apcu", "bz2", "curl", "dba", "exif", "fileinfo", "ftp", "gd", "gettext", "gmp", "igbinary", "imagick", "imap", "intl", "ldap", "mailparse", "mbstring", "mcrypt", "memcache", "memcached", "mongo", "msgpack", "mysql", "mysqli", "openssl", "pdo", "pdo_sqlite", "pdo_mysql", "pdo_pgsql", "pgsql", "phalcon", "phpiredis", "pspell", "redis", "snmp", "soap", "sockets", "sundown", "twig", "xsl", "zip", "zlib"],
-    "ZEND_EXTENSIONS": ["xdebug"]
-}
